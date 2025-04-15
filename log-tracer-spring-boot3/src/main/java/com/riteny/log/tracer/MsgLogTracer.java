@@ -37,16 +37,13 @@ public class MsgLogTracer {
     }
 
     private static Logger getLoggerByEntrance(String entrance) {
-        if (StringUtils.isEmpty(entrance)) {
+        if (!StringUtils.hasLength(entrance)) {
             return otherLogger;
         }
-        switch (entrance) {
-            case "api":
-                return apiLogger;
-            case "task":
-                return taskLogger;
-            default:
-                return otherLogger;
-        }
+        return switch (entrance) {
+            case "api" -> apiLogger;
+            case "task" -> taskLogger;
+            default -> otherLogger;
+        };
     }
 }
